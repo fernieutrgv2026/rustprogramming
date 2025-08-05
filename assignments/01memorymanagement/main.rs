@@ -1,11 +1,11 @@
-const freeze_point_fahren: f64 = 32.0;
+const FREEZE_POINT_FAHREN: f64 = 32.0;
 
 fn f_to_c(f: f64) -> f64 {
-    (f - freeze_point_fahren) * (5.0/9.0)
+    (f - FREEZE_POINT_FAHREN) * (5.0/9.0)
 }
 
 fn c_to_f(c: f64) -> f64 {
-    c * (9.0/5.0) + freeze_point_fahren
+    c * (9.0/5.0) + FREEZE_POINT_FAHREN
 }
 
 fn main () {

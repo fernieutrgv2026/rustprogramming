@@ -86,7 +86,7 @@ fn main () {
 
     loop {
         num_guesses += 1;
-        let result = check_guess(guess, sec);
+        let result = check_guess(adivinanza, sec);
         if result == 0 {
             println!("The secret number was indeed {}!", sec);
             break;

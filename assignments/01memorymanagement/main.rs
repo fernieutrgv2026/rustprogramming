@@ -101,5 +101,3 @@ fn main () {
     println!("The amount of guesses you needed was {}. Good job!", num_guesses);
 
 }
-
-}

@@ -1,43 +1,46 @@
-fn is_even(n: i32) -> bool {
-    n % 2 == 0
+fn sum_with_step(total: &mut i32, low: i32, high: i32, step: i32) {
+    let mut curr_num = low;
+    while curr_num <= high {
+        *total += curr_num;
+        curr_num += step;
+    }
 }
 
-fn main() {
-    let numbers = [1,2,3,4,5,6,7,8,9,10];
-    for &num in &numbers {
-        if num % 3 == 0 && num % 5 == 0 {
-            println!("{}: FizzBuzz", num);
-        } else if num % 3 == 0 {
-            println!("{}: Fizz", num);
-        } else if num % 5 == 0 {
-            println!("{}: Buzz", num);
-        } else {
-            if is_even(num) {
-                println!("{} is even", num);
-            } else {
-                println!("{} is odd", num);
+fn most_frequent_word(text: &str) -> (String, usize) {
+    let words: Vec<&str> = text.split_whitespace().collect();
+    let mut max_word = String::new();
+    let mut max_count = 0;
+
+    for (i, &word) in words.iter().enumerate() {
+        let mut count = 0;
+        for &w in &words {
+            if w == word {
+                count += 1;
             }
         }
-    }
-
-    let mut sum = 0;
-    let mut index = 0;
-    while index < numbers.len() {
-        sum += numbers[index];
-        index += 1;
-    }
-    println!("The sum of all the numbers = {}", sum);
-
-    let mut max_value = numbers[0];
-    let mut idx = 1;
-    loop {
-        if idx >= numbers.len() {
-            break;
+        if count > max_count {
+            max_word = word.to_string();
+            max_count = count;
         }
-        if numbers[idx] > max_value {
-            max_value = numbers[idx];
-        }
-        idx += 1;
-    }
-    println!("The largest number in the array is {}", max_value);
+    } 
+    (max_word, max_count)
+}
+
+
+fn main() {
+    let mut result = 0;
+    sum_with_step(&mut result, 0, 100, 1);
+    println!("Sum 0 to 100, step 1: {}", result);
+
+    result = 0;
+    sum_with_step(&mut result, 0, 10, 2);
+    println!("Sum 0 to 10, step 2: {}", result);
+
+    result = 0;
+    sum_with_step(&mut result, 5, 15, 3);
+    println!("Sum 5 to 15, step 3: {}", result); // i don't think 35 is possible, best i got was 38
+
+    let text = "Peter Piper picked a peck of pickled peppers, a peck of pickled peppers Peter Piper picked yes Peter good job!";
+    let (word, count) = most_frequent_word(text);
+    println!("Most frequent word: \"{}\" ({} times)", word, count);
 }

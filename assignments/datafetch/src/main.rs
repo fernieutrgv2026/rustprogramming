@@ -93,7 +93,7 @@ impl Pricing for Ethereum {
 // implementing sp500
 impl Pricing for SP500 {
     fn fetch_price(&mut self) -> Result<(), Box<dyn Error>> {
-        let url = "https://www.marketwatch.com/investing/index/spx";
+        let url = "https://query2.finance.yahoo.com/v8/finance/chart/%5EGSPC";
         let response: serde_json::Value = ureq::get(url).call();
         if let Some(price) = response["sp500"]["usd"].as_f64() {
             self.price = price;
